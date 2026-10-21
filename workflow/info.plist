@@ -19,6 +19,40 @@
   <key>objects</key>
   <array>
     <dict>
+      <key>uid</key><string>D0944400-9E37-44C9-85CD-A442F10AB756</string>
+      <key>type</key><string>alfred.workflow.input.scriptfilter</string>
+      <key>version</key><integer>3</integer>
+      <key>config</key>
+      <dict>
+        <key>keyword</key><string>bcs</string>
+        <key>withspace</key><true/>
+        <key>title</key><string>Create or Search Bear Notes</string>
+        <key>runningsubtext</key><string>Searching Bear...</string>
+        <key>script</key><string>./scripts/csearch.js &quot;$1&quot;</string>
+        <key>scriptargtype</key><integer>1</integer>
+        <key>argumenttype</key><integer>1</integer>
+        <key>alfredfiltersresults</key><false/>
+        <key>escaping</key><integer>102</integer>
+      </dict>
+    </dict>
+    <dict>
+      <key>uid</key><string>21A68AF2-E52F-4FD5-9F7A-9E4B1AB8FD5B</string>
+      <key>type</key><string>alfred.workflow.input.scriptfilter</string>
+      <key>version</key><integer>3</integer>
+      <key>config</key>
+      <dict>
+        <key>keyword</key><string>bcsearch</string>
+        <key>withspace</key><true/>
+        <key>title</key><string>Create or Search Bear Notes</string>
+        <key>runningsubtext</key><string>Searching Bear...</string>
+        <key>script</key><string>./scripts/csearch.js &quot;$1&quot;</string>
+        <key>scriptargtype</key><integer>1</integer>
+        <key>argumenttype</key><integer>1</integer>
+        <key>alfredfiltersresults</key><false/>
+        <key>escaping</key><integer>102</integer>
+      </dict>
+    </dict>
+    <dict>
       <key>uid</key><string>5B03D35A-B925-4C5D-985A-747307DB8EF7</string>
       <key>type</key><string>alfred.workflow.input.scriptfilter</string>
       <key>version</key><integer>3</integer>
@@ -100,6 +134,10 @@
   </array>
   <key>connections</key>
   <dict>
+    <key>D0944400-9E37-44C9-85CD-A442F10AB756</key>
+    <array><dict><key>destinationuid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string><key>modifiers</key><integer>0</integer><key>vitoclose</key><false/></dict></array>
+    <key>21A68AF2-E52F-4FD5-9F7A-9E4B1AB8FD5B</key>
+    <array><dict><key>destinationuid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string><key>modifiers</key><integer>0</integer><key>vitoclose</key><false/></dict></array>
     <key>5B03D35A-B925-4C5D-985A-747307DB8EF7</key>
     <array><dict><key>destinationuid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string><key>modifiers</key><integer>0</integer><key>vitoclose</key><false/></dict></array>
     <key>3583EA4B-FFB8-4431-BF08-D05B23544403</key>

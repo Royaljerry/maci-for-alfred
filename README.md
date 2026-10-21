@@ -10,6 +10,8 @@ Type `#` to complete active Bear tags. Add a space after a selected tag to filte
 
 Use `bn` or `bnew` to create a note from a title and optional tags, for example `bn Project ideas #work `. Creation goes through Bear's x-callback URL; Maci does not read clipboard content or write to Bear's database.
 
+Use `bcs` or `bcsearch` when a note may already exist. It shows matching notes and inserts a create item after the first two results; if no note matches, the create item is the only result.
+
 ## Development
 
 Run the focused JXA tests from the repository root:

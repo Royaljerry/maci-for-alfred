@@ -24,19 +24,8 @@ loadLibrary("bear-url.js");
 loadLibrary("query-parser.js");
 loadLibrary("bear-db.js");
 loadLibrary("tag-completion.js");
-
-function compactExcerpt(text) {
-    var compact = String(text || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
-    if (compact.length > 110) {
-        return compact.slice(0, 107) + "...";
-    }
-    return compact;
-}
-
-function noteToAlfredItem(note) {
-    var subtitle = note.tags ? "#" + String(note.tags).split(",").join(" #") : compactExcerpt(note.text);
-    return alfredItem(note.title || "Untitled note", subtitle, bearOpenNoteURL(note.id), true);
-}
+loadLibrary("note-items.js");
+loadLibrary("note-search.js");
 
 function buildResult(argv) {
     try {
@@ -45,8 +34,7 @@ function buildResult(argv) {
             return alfredItems(tagCompletionItems(query));
         }
 
-        var notes = query.isEmpty ? recentNotes() :
-            (query.tags.length ? searchNotesByTags(query.text, query.tags) : searchNotes(query.text));
+        var notes = notesForQuery(query);
         var items = notes.map(noteToAlfredItem);
         if (items.length === 0) {
             items.push(alfredItem("No matching Bear notes", "Try another title or note text.", "", false));
