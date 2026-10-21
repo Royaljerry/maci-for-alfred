@@ -6,6 +6,8 @@ Maci is a native JavaScript for Automation (JXA) Alfred workflow for searching B
 
 `bs` and `bsearch` display the 25 most recent active Bear notes for an empty query, or search active note titles and bodies. Title matches are ranked before body-only matches. Press Return to open the selected note in Bear.
 
+Type `#` to complete active Bear tags. Add a space after a selected tag to filter notes, and combine one or more tags with free text. Use `#"tag with spaces"` for a multi-word tag; completion inserts this syntax automatically.
+
 ## Development
 
 Run the focused JXA tests from the repository root:

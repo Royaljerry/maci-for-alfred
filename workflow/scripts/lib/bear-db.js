@@ -85,3 +85,63 @@ function searchNotes(text) {
         "LIMIT 50"
     ].join("\n"), { pattern: "%" + text + "%" });
 }
+
+function tagCompletions(prefix) {
+    var rows = runReadOnlySQLite([
+        "SELECT DISTINCT tag.ZTITLE AS title",
+        "FROM ZSFNOTETAG tag",
+        "INNER JOIN Z_5TAGS noteTag ON tag.Z_PK = noteTag.Z_13TAGS",
+        "INNER JOIN ZSFNOTE note ON noteTag.Z_5NOTES = note.Z_PK",
+        "WHERE note.ZARCHIVED = 0 AND note.ZTRASHED = 0",
+        "ORDER BY tag.ZMODIFICATIONDATE DESC",
+        "LIMIT 500"
+    ].join("\n"), {});
+    var normalizedPrefix = String(prefix).toLocaleLowerCase();
+
+    return rows.filter(function (row) {
+        return String(row.title).toLocaleLowerCase().indexOf(normalizedPrefix) !== -1;
+    }).slice(0, 25);
+}
+
+function searchNotesByTags(text, tags) {
+    var uniqueTags = tags.filter(function (tag, index) {
+        return tags.indexOf(tag) === index;
+    });
+    var parameters = {};
+    var tagPlaceholders = uniqueTags.map(function (tag, index) {
+        var name = "tag" + index;
+        parameters[name] = tag;
+        return ":" + name;
+    });
+    var textClause = "";
+    if (text) {
+        parameters.pattern = "%" + text + "%";
+        textClause = [
+            "AND (lower(note.ZTITLE) LIKE lower(:pattern)",
+            "     OR lower(COALESCE(note.ZTEXT, '')) LIKE lower(:pattern))"
+        ].join("\n    ");
+    }
+
+    return runReadOnlySQLite([
+        "SELECT",
+        "    " + NOTE_COLUMNS,
+        "FROM ZSFNOTE note",
+        NOTE_TAG_JOINS,
+        "WHERE note.ZARCHIVED = 0 AND note.ZTRASHED = 0",
+        "AND note.Z_PK IN (",
+        "    SELECT taggedNote.Z_PK",
+        "    FROM ZSFNOTE taggedNote",
+        "    INNER JOIN Z_5TAGS taggedRelation ON taggedNote.Z_PK = taggedRelation.Z_5NOTES",
+        "    INNER JOIN ZSFNOTETAG taggedTag ON taggedRelation.Z_13TAGS = taggedTag.Z_PK",
+        "    WHERE taggedNote.ZARCHIVED = 0 AND taggedNote.ZTRASHED = 0",
+        "      AND taggedTag.ZTITLE IN (" + tagPlaceholders.join(", ") + ")",
+        "    GROUP BY taggedNote.Z_PK",
+        "    HAVING COUNT(DISTINCT taggedTag.ZTITLE) = " + uniqueTags.length,
+        ")",
+        textClause,
+        "GROUP BY note.ZUNIQUEIDENTIFIER, note.ZTITLE",
+        text ? "ORDER BY CASE WHEN lower(note.ZTITLE) LIKE lower(:pattern) THEN 0 ELSE 1 END," : "ORDER BY",
+        "         note.ZMODIFICATIONDATE DESC",
+        "LIMIT 50"
+    ].filter(function (line) { return line !== ""; }).join("\n"), parameters);
+}
