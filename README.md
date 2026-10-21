@@ -1,5 +1,7 @@
 # Maci for Alfred
 
+![Maci bear icon](icon/maci-bear-hat-red-low-1024.png)
+
 Maci is an Alfred workflow for searching, opening, and creating [Bear](https://bear.app/) notes on Apple Silicon Macs. It uses native JavaScript for Automation (JXA) and macOS's built-in `sqlite3` command—no bundled executables, Rosetta, Homebrew, Node.js, or other runtime is required.
 
 **Maci** is the Hungarian nickname for a bear (literally, “little bear”). It is also the name I use when referring to the Bear app.
