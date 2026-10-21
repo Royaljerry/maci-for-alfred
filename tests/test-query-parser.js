@@ -11,6 +11,7 @@ function readText(path) {
 
 eval(readText("workflow/scripts/lib/query-parser.js"));
 eval(readText("workflow/scripts/lib/alfred.js"));
+eval(readText("workflow/scripts/lib/bear-url.js"));
 
 function assertEqual(actual, expected, label) {
     if (actual !== expected) {
@@ -44,5 +45,12 @@ var json = alfredItems([alfredItem("Title", "Subtitle", "bear://note", true)]);
 var item = JSON.parse(json).items[0];
 assertEqual(item.title, "Title", "Alfred item title");
 assertEqual(item.arg, "bear://note", "Alfred item arg");
+
+var createURL = bearCreateNoteURL('T\u00e9st & "quotes"', ["caf\u00e9", "O'Brien"]);
+assertEqual(
+    createURL,
+    "bear://x-callback-url/create?show_window=yes&new_window=no&edit=yes&title=T%C3%A9st%20%26%20%22quotes%22&tags=caf%C3%A9%2CO'Brien",
+    "encoded Bear create URL"
+);
 
 writeStdout("query-parser and Alfred serialization tests passed\n");

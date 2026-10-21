@@ -8,6 +8,8 @@ Maci is a native JavaScript for Automation (JXA) Alfred workflow for searching B
 
 Type `#` to complete active Bear tags. Add a space after a selected tag to filter notes, and combine one or more tags with free text. Use `#"tag with spaces"` for a multi-word tag; completion inserts this syntax automatically.
 
+Use `bn` or `bnew` to create a note from a title and optional tags, for example `bn Project ideas #work `. Creation goes through Bear's x-callback URL; Maci does not read clipboard content or write to Bear's database.
+
 ## Development
 
 Run the focused JXA tests from the repository root:

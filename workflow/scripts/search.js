@@ -23,6 +23,7 @@ loadLibrary("alfred.js");
 loadLibrary("bear-url.js");
 loadLibrary("query-parser.js");
 loadLibrary("bear-db.js");
+loadLibrary("tag-completion.js");
 
 function compactExcerpt(text) {
     var compact = String(text || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
@@ -37,21 +38,11 @@ function noteToAlfredItem(note) {
     return alfredItem(note.title || "Untitled note", subtitle, bearOpenNoteURL(note.id), true);
 }
 
-function tagToAlfredItem(tag, query) {
-    var formattedTag = tagSyntax(tag.title);
-    var item = alfredItem(formattedTag, "Filter Bear notes by this tag", "", false);
-    item.autocomplete = query.completionPrefix + formattedTag + " ";
-    item.uid = "tag-" + tag.title;
-    return item;
-}
-
 function buildResult(argv) {
     try {
         var query = parseQuery(argv.length > 0 ? argv[0] : "");
         if (query.isTagCompletion) {
-            return alfredItems(tagCompletions(query.tagPrefix).map(function (tag) {
-                return tagToAlfredItem(tag, query);
-            }));
+            return alfredItems(tagCompletionItems(query));
         }
 
         var notes = query.isEmpty ? recentNotes() :
