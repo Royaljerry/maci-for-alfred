@@ -145,3 +145,16 @@ function searchNotesByTags(text, tags) {
         "LIMIT 50"
     ].filter(function (line) { return line !== ""; }).join("\n"), parameters);
 }
+
+function noteByID(noteID) {
+    var rows = runReadOnlySQLite([
+        "SELECT ZUNIQUEIDENTIFIER AS id, ZTITLE AS title, COALESCE(ZTEXT, '') AS text",
+        "FROM ZSFNOTE",
+        "WHERE ZARCHIVED = 0 AND ZTRASHED = 0 AND ZUNIQUEIDENTIFIER = :noteID",
+        "LIMIT 1"
+    ].join("\n"), { noteID: noteID });
+    if (!rows.length) {
+        throw new Error("The selected Bear note is unavailable.");
+    }
+    return rows[0];
+}

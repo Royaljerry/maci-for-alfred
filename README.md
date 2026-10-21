@@ -12,6 +12,8 @@ Use `bn` or `bnew` to create a note from a title and optional tags, for example 
 
 Use `bcs` or `bcsearch` when a note may already exist. It shows matching notes and inserts a create item after the first two results; if no note matches, the create item is the only result.
 
+While searching, hold Option to open the current query in Bear. Starting a final token with `@` or `-@` offers Bear special-search completion; a special search with no local result provides an item to run it in Bear. Hold Shift on a selected note to paste its Markdown link, or Command+Shift to paste a generated table of contents into the active app.
+
 ## Development
 
 Run the focused JXA tests from the repository root:

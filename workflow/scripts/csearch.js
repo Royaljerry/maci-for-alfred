@@ -24,6 +24,7 @@ loadLibrary("bear-url.js");
 loadLibrary("query-parser.js");
 loadLibrary("bear-db.js");
 loadLibrary("tag-completion.js");
+loadLibrary("special-search.js");
 loadLibrary("note-items.js");
 loadLibrary("note-search.js");
 loadLibrary("create-item.js");
@@ -34,8 +35,14 @@ function buildResult(argv) {
         if (query.isTagCompletion) {
             return alfredItems(tagCompletionItems(query));
         }
+        if (query.isSpecialCompletion) {
+            return alfredItems(specialCompletionItems(query));
+        }
 
-        var searchItems = notesForQuery(query).map(noteToAlfredItem);
+        var searchItems = notesForQuery(query).map(function (note) { return noteToAlfredItem(note, query); });
+        if (searchItems.length === 0 && query.hasSpecialSearch) {
+            searchItems.push(appSearchItem(query));
+        }
         searchItems.splice(Math.min(2, searchItems.length), 0, createNoteItem(query));
         return alfredItems(searchItems);
     } catch (error) {
