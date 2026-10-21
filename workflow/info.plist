@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>bundleid</key>
+  <string>com.maci.alfred</string>
+  <key>name</key>
+  <string>Maci</string>
+  <key>description</key>
+  <string>Search Bear notes without bundled executables.</string>
+  <key>category</key>
+  <string>Productivity</string>
+  <key>createdby</key>
+  <string>Maci</string>
+  <key>version</key>
+  <string>0.1.0</string>
+  <key>disabled</key>
+  <false/>
+  <key>objects</key>
+  <array>
+    <dict>
+      <key>uid</key><string>5CB53014-4495-42A6-AB51-19E6B1CD918E</string>
+      <key>type</key><string>alfred.workflow.input.scriptfilter</string>
+      <key>version</key><integer>3</integer>
+      <key>config</key>
+      <dict>
+        <key>keyword</key><string>bs</string>
+        <key>withspace</key><true/>
+        <key>title</key><string>Search Bear Notes</string>
+        <key>runningsubtext</key><string>Searching Bear...</string>
+        <key>script</key><string>./scripts/search.js &quot;$1&quot;</string>
+        <key>scriptargtype</key><integer>1</integer>
+        <key>argumenttype</key><integer>1</integer>
+        <key>alfredfiltersresults</key><false/>
+        <key>escaping</key><integer>102</integer>
+      </dict>
+    </dict>
+    <dict>
+      <key>uid</key><string>CCCD4E01-1E36-4D68-9031-04393BDDE42D</string>
+      <key>type</key><string>alfred.workflow.input.scriptfilter</string>
+      <key>version</key><integer>3</integer>
+      <key>config</key>
+      <dict>
+        <key>keyword</key><string>bsearch</string>
+        <key>withspace</key><true/>
+        <key>title</key><string>Search Bear Notes</string>
+        <key>runningsubtext</key><string>Searching Bear...</string>
+        <key>script</key><string>./scripts/search.js &quot;$1&quot;</string>
+        <key>scriptargtype</key><integer>1</integer>
+        <key>argumenttype</key><integer>1</integer>
+        <key>alfredfiltersresults</key><false/>
+        <key>escaping</key><integer>102</integer>
+      </dict>
+    </dict>
+    <dict>
+      <key>uid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string>
+      <key>type</key><string>alfred.workflow.action.script</string>
+      <key>version</key><integer>2</integer>
+      <key>config</key>
+      <dict>
+        <key>script</key><string>open &quot;{query}&quot;</string>
+        <key>scriptargtype</key><integer>0</integer>
+        <key>escaping</key><integer>102</integer>
+      </dict>
+    </dict>
+  </array>
+  <key>connections</key>
+  <dict>
+    <key>5CB53014-4495-42A6-AB51-19E6B1CD918E</key>
+    <array><dict><key>destinationuid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string><key>modifiers</key><integer>0</integer><key>vitoclose</key><false/></dict></array>
+    <key>CCCD4E01-1E36-4D68-9031-04393BDDE42D</key>
+    <array><dict><key>destinationuid</key><string>5C08764C-7DBE-47E7-AFBB-3EB01BFEEEF7</string><key>modifiers</key><integer>0</integer><key>vitoclose</key><false/></dict></array>
+  </dict>
+</dict>
+</plist>
