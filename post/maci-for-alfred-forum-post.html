@@ -1,0 +1,33 @@
+<h1>Maci – a modern Bear workflow for Alfred</h1>
+
+<p><img src="maci-bear-hat-red-low-1024.png" alt="Maci's red bear-in-a-hat icon" width="256"></p>
+
+<p><strong>Maci</strong> is an Alfred workflow for searching, opening, and creating <a href="https://bear.app/">Bear</a> notes. It is a native JavaScript for Automation (JXA) rewrite for Apple Silicon Macs, so it has no bundled executables and does not require Rosetta, Homebrew, Node.js, or any other runtime.</p>
+
+<p>The name comes from Hungarian: <em>maci</em> is an affectionate word for a bear (“little bear”), and it is what I call the Bear app.</p>
+
+<h2>Download and install</h2>
+
+<p><a href="https://github.com/Royaljerry/maci-for-alfred/raw/refs/heads/main/dist/Maci.alfredworkflow">Download Maci.alfredworkflow</a>, then double-click it to import it into Alfred. Open Bear once before using Maci, so its local database is available. No workflow configuration is required.</p>
+
+<p>Source and documentation: <a href="https://github.com/Royaljerry/maci-for-alfred">github.com/Royaljerry/maci-for-alfred</a></p>
+
+<h2>What it does</h2>
+
+<ul>
+  <li><code>bs</code> or <code>bsearch</code> searches Bear notes. An empty query shows the 25 most recently modified active notes; text searches titles and note bodies, with title matches ranked first.</li>
+  <li>Type <code>#</code> to complete and filter by Bear tags. Multiple tags and free text can be combined; use <code>#&quot;tag with spaces&quot;</code> for multi-word tags.</li>
+  <li><code>bn</code> or <code>bnew</code> creates a note from a title and optional tags, for example <code>bn Project ideas #work</code>.</li>
+  <li><code>bcs</code> or <code>bcsearch</code> combines search and creation, showing matching notes alongside a create option.</li>
+  <li>Type a final token beginning with <code>@</code> or <code>-@</code> to complete Bear special searches, such as <code>@today</code>, <code>@todo</code>, and <code>-@done</code>.</li>
+</ul>
+
+<p>On a search result, press Return to open the note. Hold Option to run the current query in Bear, Shift to paste the selected note's Markdown link, or Command-Shift to paste a generated table of contents.</p>
+
+<p>Maci reads Bear's local SQLite database in read-only mode and uses Bear's x-callback URLs to open, search, and create notes. It never writes directly to Bear's database.</p>
+
+<h2>Credit and AI disclosure</h2>
+
+<p>Maci reimplements the selected user-facing features of <a href="https://github.com/drgrib/alfred-bear">drgrib's original Bear Workflow</a>, which was the feature reference for this project.</p>
+
+<p>For transparency: this workflow was created entirely by AI: <strong>Codex, GPT-5.6 Terra High</strong>. I am very open to fixes, feedback, and ideas for additional features; please share them in the repository's issues or in this thread.</p>

@@ -1,4 +1,4 @@
-# Maci — a modern Bear workflow for Alfred
+# Maci – a modern Bear workflow for Alfred
 
 ![Maci’s red bear-in-a-hat icon](maci-bear-hat-red-low-1024.png)
 
